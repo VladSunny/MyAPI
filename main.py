@@ -1,9 +1,8 @@
-from fastapi import FastAPI, Query
-from typing import List
+from flask import Flask, request
 
-app = FastAPI()
+app = Flask(__name__)
 
-
-@app.get("/hello/")
-def read_name(name: str):
-    return {"message": f"Hello {name}"}
+@app.route('/hello/')
+def hello_name():
+    name = request.args.get('name', 'World')  # Получаем параметр name, значение по умолчанию - 'World'
+    return {'message': f'Hello {name}'}
